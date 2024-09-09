@@ -20,7 +20,7 @@ void GXPrimitive::TriangluatePrimitive() {
 void GXPrimitive::TriangulateTriangleStrip() {
     std::vector<ModernVertex> Triangles;
 
-    Triangles.reserve(mVertices.size() *  3);
+    Triangles.reserve((mVertices.size() *  3) + 1);
 
     for (size_t i = 2; i < mVertices.size(); i++) {
         bool isIndexOdd = i % 2 != 0;
@@ -43,7 +43,7 @@ void GXPrimitive::TriangulateTriangleStrip() {
 void GXPrimitive::TriangulateTriangleFan() {
     std::vector<ModernVertex> Triangles;
 
-    Triangles.reserve(mVertices.size() *  3);
+    Triangles.reserve((mVertices.size() *  3) + 1);
 
     for (size_t i = 1; i < mVertices.size() - 1; i++) {
         ModernVertex const& v0 = mVertices[i];
@@ -171,9 +171,6 @@ void GXGeometry::CreateVertexArray() {
                 mModelIndices.push_back(static_cast<uint32_t>(index++));
             }
         }
-
-        mModelVertices.shrink_to_fit();
-        mModelIndices.shrink_to_fit();
 
         Shape->mVertexCount = static_cast<uint32_t>(mModelIndices.size()) - Shape->mFirstVertexOffset;
     }

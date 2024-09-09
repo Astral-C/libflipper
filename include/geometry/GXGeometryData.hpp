@@ -138,6 +138,20 @@ public:
     // Returns a const reference to the list of all vertices in this model.
     const std::vector<ModernVertex>& GetModelVertices() const { return mModelVertices; }
 
+    void CleanupVertexArray() {
+        mModelVertices = {};
+        mModelIndices = {};
+
+        for(auto shape : mShapes){
+            for (GXPrimitive* p : shape->GetPrimitives()) {
+                delete p;
+            }
+
+            shape->GetPrimitives().clear();
+        }
+
+    }
+
     // Processes the loaded geometry to be easier for modern GPUs to render.
     void CreateVertexArray();
 };
