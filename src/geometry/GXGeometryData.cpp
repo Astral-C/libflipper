@@ -174,4 +174,7 @@ void GXGeometry::CreateVertexArray() {
 
         Shape->mVertexCount = static_cast<uint32_t>(mModelIndices.size()) - Shape->mFirstVertexOffset;
     }
+
+    mModelVertices.shrink_to_fit();
+    mModelIndices.shrink_to_fit();
 }
