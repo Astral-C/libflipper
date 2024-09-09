@@ -139,8 +139,9 @@ public:
     const std::vector<ModernVertex>& GetModelVertices() const { return mModelVertices; }
 
     void CleanupVertexArray() {
-        mModelVertices = {};
-        mModelIndices = {};
+
+        mModelVertices.clear();
+        mModelIndices.clear();
 
         for(auto shape : mShapes){
             for (GXPrimitive* p : shape->GetPrimitives()) {
